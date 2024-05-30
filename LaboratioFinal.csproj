@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataClass\Model\ClsCursor.cs" />
     <Compile Include="DataClass\Model\ConeccionMySQL.cs" />
     <Compile Include="DataClass\Model\consolas.cs" />
     <Compile Include="Form1.cs">

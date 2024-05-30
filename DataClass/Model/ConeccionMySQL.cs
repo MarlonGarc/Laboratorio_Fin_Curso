@@ -11,24 +11,53 @@ namespace LaboratioFinal.DataClass.Model
     internal class ConeccionMySQL
     {
         private string connectionString = "Server=localhost; Database=db_universidad;Uid=root;Pwd = Casttle32057881 ";
+        MySqlConnection connection;
 
-        public DataTable LeerCatalogo()
+        public ConeccionMySQL()
         {
-            DataTable Catalogo = new DataTable();
+            connection = new MySqlConnection(connectionString);
+        }
+
+        public List<consolas> ObtenerTodasConsolas()
+        {
+            List<consolas> consolas = new List<consolas>();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                connection.Open();
-                string sql = "Select * from catalogo_consolas";
-                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                string query = "SELECT * FROM catalogo_consolas";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                try
                 {
-                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    connection.Open();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    int count = 0;
+                    while (reader.Read())
                     {
-                        adapter.Fill(Catalogo);
+                        consolas consola = new consolas
+                        (
+                            id: reader.GetInt32("id_consola"),
+                            nombre_consola: reader.GetString("nombre_consola"),
+                            compania: reader.GetString("Compania"),
+                            anio_lanzamiento: reader.GetInt32("anio_lanzamiento"),
+                            generacion: reader.GetInt32("generacion")
+
+                            );
+
+
+                        consolas.Add(consola);
+                        count++;
+
                     }
+                    reader.Close();
+
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                return consolas;
             }
-            return Catalogo;
         }
-        
     }
 }

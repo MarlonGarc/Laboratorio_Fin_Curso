@@ -6,21 +6,24 @@ using System.Threading.Tasks;
 
 namespace LaboratioFinal.DataClass
 {
-    internal class consolas    
+    internal class consolas
     {
-        public int id_consola { get; set; }
-        public string nombre_consola { get; set; }
-        public string compania { get; set; }
-        public int anio_lanzamiento { get; set; }
-        public int generacion { get; set; }
+        private string connectionString = "Server=localhost; Database=db_universidad;Uid=root;Pwd = Casttle32057881 ";
+        public int ID { get; set; }
+        public string Nombre_consola { get; set; }
+        public string Compania { get; set; }
+        public int Anio_lanzamiento { get; set; }
+        public int Generacion { get; set; }
 
-        public consolas (int ID, string Nombre, string Compania, int Anio_Lanzamiento, int Generacion)
+        public consolas() { }
+
+        public consolas(int id, string nombre_consola, string compania, int anio_lanzamiento, int generacion)
         {
-            id_consola = ID;
-            nombre_consola = Nombre;
-            compania = Compania;
-            anio_lanzamiento = Anio_Lanzamiento;
-            generacion = Generacion;
+            ID = id;
+            Nombre_consola = nombre_consola;
+            Compania = compania;
+            Anio_lanzamiento = anio_lanzamiento;
+            Generacion = generacion;
         }
     }
 }
